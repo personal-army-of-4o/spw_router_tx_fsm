@@ -9,6 +9,8 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+library work;
+use work.config.all;
 
 
 entity spw_router_tx_fsm is
@@ -18,12 +20,12 @@ entity spw_router_tx_fsm is
 
         -- mux control
         iMux_en: in std_logic;
-        iMux_onehot: in std_logic_vector; -- len = port num (pn)
+        iMux_onehot: in std_logic_vector (cPort_num-1 downto 0); -- len = port num (pn)
 
         -- to data source
-        iValid: in std_logic_vector; -- len = pn
-        iData: in std_logic_vector; -- len = pn*9
-        oAck: out std_logic_vector; -- len = pn
+        iValid: in std_logic_vector (cPort_num-1 downto 0); -- len = pn
+        iData: in std_logic_vector (cPort_num*9-1 downto 0); -- len = pn*9
+        oAck: out std_logic_vector (cPort_num-1 downto 0); -- len = pn
 
         -- to data sink
         oValid: out std_logic;
